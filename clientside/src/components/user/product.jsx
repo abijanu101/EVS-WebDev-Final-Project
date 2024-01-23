@@ -19,6 +19,29 @@ export default function Product() {
         getProd();
     }, [useEffectDependency])
 
+    function convPriceToStr(num) {
+        let length = 1;
+
+        for (; Math.floor(Number(num) / (10 ** length)); length++)
+            ;
+
+        let string = "";
+        let commaStart = length % 3;
+        commaStart = commaStart == 0 ? 3 : commaStart;
+
+        for (let i = 1; i <= length; i++)
+        {
+            string += Math.floor(Number(num) / (10 ** (length - i))) % 10;
+            if (i == commaStart && i != length)
+            {
+                string += ',' 
+                commaStart += 3;
+            }
+        }
+
+        return string;
+    }
+
     function getReviews(reviews) {
         let sum = 0;
         for (const i in reviews) {
@@ -57,7 +80,7 @@ export default function Product() {
                     <Col>
                         <div>
                             <h2 className='display-5' style={{ fontWeight: "bold" }} >{prod.name}</h2>
-                            <p className='display-6 text-success fs-4' >PKR/ {prod.price}</p>
+                            <p className='display-6 text-success fs-4' >PKR/ {convPriceToStr(prod.price)}</p>
                             <p>{prod.reviews ? <span style={{ color: "orange" }}>{getReviews(prod.reviews).stars} ({prod.reviews.length})</span> : "No Reviews"}</p>
                         </div>
                         <hr />

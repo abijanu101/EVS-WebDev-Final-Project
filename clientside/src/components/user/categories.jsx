@@ -13,7 +13,7 @@ export default function Categories() {
                 .then(data => setArray(data));
         }
         getCats();
-    });
+    }, []);
 
     return (
         <>

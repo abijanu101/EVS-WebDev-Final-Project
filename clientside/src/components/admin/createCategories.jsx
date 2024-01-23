@@ -3,7 +3,6 @@ import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import { Card, Col, Container, Form, Row, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { render } from 'react-dom';
 
 export default function CategoriesPage() {
   const [array, setArray] = useState([]);
@@ -26,20 +25,18 @@ export default function CategoriesPage() {
 
 
   async function editCategory(e) {
-    console.log(e.target.getAttribute("cid"));
+    let test = (await e.target.getAttribute("cid"));
+    console.log(test);
   }
-  
+
   async function deleteCategory(e) {
-    let id = String(e.target.getAttribute("cid"));
+    let id = String(await e.target.getAttribute("cid"));
     console.log(id);
-    
-    fetch(`http://127.0.0.1:4000/categories/${id}`, {
-      method: "DELETE"
-    })
-      .then(res => {
-        console.log(res);
+
+    let res = await
+      fetch(`http://127.0.0.1:4000/categories/${id}`, {
+        method: "DELETE"
       })
-      .catch(err => { console.log(err) });
   }
 
   async function handleTextUpdate(e) {

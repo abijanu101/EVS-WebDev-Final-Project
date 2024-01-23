@@ -8,7 +8,7 @@ export default function AdminLayout() {
         <>
             <Container fluid>
                 <Row>
-                    <Col className="col-2">
+                    <Col className="col-3">
                         <Card>
                             <Card.Header className="bg-secondary">
                                 <Link to="/admin" style={{ textDecoration: "none" }}>
